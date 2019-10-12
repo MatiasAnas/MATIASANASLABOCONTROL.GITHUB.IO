@@ -1,0 +1,13 @@
+En esta simulación demostramos el comportamiento de un solo tanque ante un caudal de entrada variable.
+
+La secuencia del caudal de entrada es la siguiente:
+- Se incrementa de 0 a 1 en t0 = 1.
+- Se decrementa de 1 a 0 en t1 = 15.
+- Se incrementa de 0 a 0.5 en t2 = 0.5.
+
+Se deberá observar en el scope 'Nivel - H' como cuando el caudal de entrada está fijo en un valor distinto de 0, el nivel del tanque se incrementa hasta llegar a un equilibrio. Por otro lado cuando el caudal de entrada está en 0, el nivel del tanque se decrementa hasta 0.
+
+Se deberá observar en el scope 'Caudal - Q' los caudales de entrada y salida del tanque. Se observa que, pasados los transitorios, ambos caudales siempre se igualan.
+
+Observación:
+Se observó que se tenía un problema con el caudal de salida. El mismo oscilaba levemente alrededor de 0 cuando tenia que llegar a ese valor. Dicho error fue corregido y ahora se mantiene en 0 en los momentos en que la altura es 0.

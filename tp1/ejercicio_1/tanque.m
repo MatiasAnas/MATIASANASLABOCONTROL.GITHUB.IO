@@ -217,6 +217,14 @@ h = x;
 qi = u(1);
 h_next = u(2);
 
+if(h <= 0)
+    h = 0;
+end
+
+if(h_next <= 0)
+    h_next = 0;
+end
+
 qo = 1 / R * sqrt(abs(h - h_next)) * sign(h - h_next);
 
 delta_q = qi - qo;
@@ -256,9 +264,17 @@ h = x;
 
 h_next = u(2);
 
+if(h <= 0)
+    h = 0;
+end
+
+if(h_next <= 0)
+    h_next = 0;
+end
+
 qo = 1 / R * sqrt(abs(h - h_next)) * sign(h - h_next);
 
-sys = [qo, h];
+sys = [h, qo];
 
 % end mdlOutputs
 

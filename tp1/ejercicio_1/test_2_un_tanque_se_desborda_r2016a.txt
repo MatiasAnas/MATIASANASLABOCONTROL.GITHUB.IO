@@ -1,0 +1,7 @@
+En esta simulación demostramos como el modelo de el tanque se comporta ante situaciones de desborde.
+
+La señal de entrada se incrementa desde un valor 0 a 1 en t0 = 1, y se decrementa de 1 a 0 en un t1 = 15.
+
+Se observa en el scope 'Nivel - H' que el nivel se incrementa hasta el valor de saturación, que en este caso es 0.6, y luego se decrementa a 0 nuevamente.
+
+Se observa en el scope 'Caudal - Q' que hay una perdida de caudal, y el de salida no llega a igualar al de entrada cuando el mismo esta en 1.

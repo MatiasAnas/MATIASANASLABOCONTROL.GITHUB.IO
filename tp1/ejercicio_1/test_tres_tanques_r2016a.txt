@@ -1,0 +1,21 @@
+En esta simulación se observan los tres tanques conectados.
+
+El caudal de entrada se incrementa de 0 a 1 en t0 = 1, luego se lo decrementa a 0 en t1 = 20.
+
+Se observa en el scope 'Nivel - H' como los tres se llenan y luego se vacían. Se observa que el primer tanque es el primero en llenarse y el ultimo en vaciarse, como se esperaba. Por otro lado se observa que los niveles finales no son los mismos, sino que hay un Delta H de tanque a tanque, cosa que puede demostrarse matemáticamente:
+
+En equilibrio:
+qi = qo
+
+Por otro lado:
+qi = qo = (1/R) sqrt(H_anterior - H_siguiente)
+
+Por lo tanto:
+
+H_siguiente = H_anterior - (R qi)^2
+
+y:
+
+H_siguiente < H_anterior
+
+Se observa en el scope 'Caudal - Q' como cuando se alcanza el equilibrio, los caudales se igualan.

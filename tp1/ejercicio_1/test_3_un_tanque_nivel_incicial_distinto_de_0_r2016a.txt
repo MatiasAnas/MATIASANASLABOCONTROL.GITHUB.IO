@@ -1,0 +1,9 @@
+En esta simulación demostramos como el modelo del tanque incluye condiciónes iniciales.
+
+El caudal de entrada esta siempre en 0.
+
+El nivel inicial del tanque está en 1.
+
+Se observa en el scope 'Nivel - H' como el nivel baja de 1 a 0.
+
+Se observa en el scope 'Caudal - Q' que el caudal de salida decae hasta que el tanque se vacía, y queda en 0.
