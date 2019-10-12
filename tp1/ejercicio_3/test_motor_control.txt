@@ -1,0 +1,32 @@
+En la carpeta se encuentran:
+-dcmotor_qenc: S-Function del motor provista por la catedra.
+-encoder_a_rmp: Contador de pulsos desarrollado para el punto 2.
+-pid_sfun: S-Function con el PID.
+-test_motor_control: Archivo con el control del motor, tanto para el modelo identificado como para la planta real.
+
+Criterio:
+Se ha optado como criterio de ajuste de los PID poder llegar al valor de referencia, en el menor tiempo posible, limitando a que el sobrepico no exceda un 3% y teniendo en cuenta que no se sature la tensión de entrada. Se ha tomado como referencia inicial los valores dados por el método de ziegler nichols, sin embargo, se necesito un reajuste manual posterior para lograr que la entrada no sature y el sobrepico no exceda el 3%.
+
+Diferencias entre la planta identificada y real:
+Se ha observado que la planta real posee una tendencia a oscilar mas que el modelo de primer orden propuesto. Por lo tanto, se requirió bajar la ganancia proporcional, con respecto a la ganancia utilizada con el modelo identificado, para poder lograr las especificaciones propuestas.
+
+Parametros de los PID:
+-Planta Identificada:
+ Kp = 0.008
+ Ki = 25
+ Kd = 0.00125
+ gamma: 1/10.
+
+-Planta Real:
+ Kp = 0.005
+ Ki = 25
+ Kd = 0.00125
+ gamma: 1/10.
+
+Tiempo de muestreo (Ambos casos):
+Ts = 0.005
+
+Resultados:
+La simulación tiene dos scopes:
+'ScopeVelocidad': Muestra como las velocidades siguen la referencia.
+'ScopeTension': Muestra las entradas de las plantas.
