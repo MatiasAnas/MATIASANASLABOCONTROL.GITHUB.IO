@@ -1,0 +1,13 @@
+La carpeta entregada contiene:
+-'dcmotor_qenc.p': Archivo con la S-Funtion de la planta.
+
+-'encoder_a_rpm.m': Archvo con la S-Funtion que cuenta los pulsos del motor y genera la medición de velocidad.
+
+-'test_motor.slx': Archivo que contiene el esquema en simulink de prueba de la S-Function que cuenta pulsos.
+El método utilizado fue contar la cantidad de pulsos del encoder en una ventana de tiempo de 0.005s. Cada ese intervalo el bloque modificará la salida con la nueva medición. El tiempo de muestreo de los pulsos, sin embargo, fue de 0.00001s (Mucho mayor que el tiempo entre mediciones) dado a que necesitamos detectar los flancos de los pulsos. Se ha utilizado un encoder de 150 pulsos por vuelta, dado a que es un numero que se puede encontrar en el mercado.
+En la simulación se utiliza como entrada del motor dos escalones sumados de 6V, con una diferencia de 0.25s entre los mismos. Se puede observar en el scope 'ScopeVelocidad' como la velocidad del motor se incrementa en dos tandas, a medida que se van activando los escalones de entrada.
+
+-'ejercicio_2': Archivo que realiza la identificación de la planta. No es necesario tener el simulink abierto para ejecutarlo. Simplemente con correr el script, el mismo ejecutara el archivo anterior 'test_motor.slx'. Con los datos del mismo, obtendrá a identificación de la planta generando un gráfico con la comparación entre la planta real y el modelo identificado. También generará una salida de texto similar a la siguiente:
+
+Transferencia Propuesta: H(s) = A / (s * tau + 1) * exp(-t0 * s)
+Transferencia Resultado: H(s) = 366.67 / (s * 0.04 + 1) * exp(-0.00 * s)

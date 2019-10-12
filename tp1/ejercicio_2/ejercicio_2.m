@@ -6,7 +6,7 @@ T_INICIO_DE_SEGUNDO_ESCALON = 0.25;
 T_FINAL_SIMULACION = 0.5;
 
 % Simulo.
-simOut = sim('motor.slx','ReturnWorkspaceOutputs','on');
+simOut = sim('test_motor.slx','ReturnWorkspaceOutputs','on');
 
 tiempos = simOut.get('tout');
 velocidad = simOut.get('yout').signals.values;
@@ -27,17 +27,28 @@ for i = 1 : length(tiempos)
     end
 end
 
-A = (velocidad_final - velocidad_inicial) * tau;
+A = (velocidad_final - velocidad_inicial) / 6;
 
 % Imprimo parametros.
 
 fprintf('Transferencia Propuesta: H(s) = A / (s * tau + 1) * exp(-t0 * s)\n');
 fprintf('Transferencia Resultado: H(s) = %.2f / (s * %.2f + 1) * exp(-%.2f * s)\n', A, tau, t0);
 
+% Respuesta al escalon del modelo.
+
+s = tf('s');
+M = exp(-t0 * s) * A / (tau * s + 1);
+
+[y, t] = step(M);
+
+velocidad_modelo = y * 6 + velocidad_inicial;
+tiempos_modelo = t + T_INICIO_DE_SEGUNDO_ESCALON;
 
 % Grafico De Velocidad VS Tiempo.
 figure(1);
-plot(tiempos, velocidad);
+hold on;
+plot(tiempos, velocidad, 'b');
+plot(tiempos_modelo, velocidad_modelo, 'r');
 grid on;
 axis([T_INICIO_DE_SEGUNDO_ESCALON, T_FINAL_SIMULACION, velocidad_inicial, velocidad_final]);
 title('Velocidad VS Tiempo');
@@ -46,3 +57,4 @@ ylabel('Velocidad (RPM)');
 referencia = (0.63 * ((velocidad_final - velocidad_inicial))+velocidad_inicial);
 line([0 T_FINAL_SIMULACION], [referencia referencia], 'Color','red','LineStyle','--');
 line([tiempos(i) tiempos(i)], [0 velocidad_final], 'Color','red','LineStyle','--');
+legend('Real', 'Modelo');
