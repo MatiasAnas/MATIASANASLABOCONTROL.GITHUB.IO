@@ -44,6 +44,32 @@ M = exp(-t0 * s) * A / (tau * s + 1);
 velocidad_modelo = y * 6 + velocidad_inicial;
 tiempos_modelo = t + T_INICIO_DE_SEGUNDO_ESCALON;
 
+% Error Cuadratico Medio
+
+error_acumulado = 0;
+
+tiempo_actual = tiempos_modelo(1);
+i = 1;
+while(tiempo_actual <= T_FINAL_SIMULACION)
+    % Como los indices en ambos tiempos no son los mismos,
+    % debo buscar cuales son los indices i,j que corresponden a los
+    % mismos tiempos.
+    for j = 1:(length(tiempos) - 1)
+        if((tiempos(j) <= tiempo_actual) && (tiempos(j + 1) >= tiempo_actual))
+            break;
+        end
+    end
+    
+    error_acumulado = error_acumulado + (velocidad(j) - velocidad_modelo(i))^2;
+    
+    i = i + 1;
+    tiempo_actual = tiempos_modelo(i);
+end
+
+ecm_raiz = sqrt(error_acumulado / i);
+
+fprintf('SQRT(ECM): %.2f\n', ecm_raiz);
+
 % Grafico De Velocidad VS Tiempo.
 figure(1);
 hold on;

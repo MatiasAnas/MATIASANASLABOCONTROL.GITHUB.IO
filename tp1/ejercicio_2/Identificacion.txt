@@ -12,7 +12,15 @@ por la funcion implementada, es posible suponer que t0 -> 0.
 
 Simplemente con correr el script, el mismo ejecutara el archivo anterior 'test_motor.slx'.
 Con los datos del mismo, obtendrá a identificación de la planta generando un gráfico con la comparación
-entre la planta real y el modelo identificado. 
+entre la planta real y el modelo identificado.
+
 El script generará una salida de texto similar a la siguiente:
 
+Transferencia Propuesta: H(s) = A / (s * tau + 1) * exp(-t0 * s)
 Transferencia Resultado: H(s) = 366.67 / (s * 0.04 + 1) * exp(-0.00 * s)
+SQRT(ECM): 57.93
+
+Finalmente, el script obtiene la raíz del error cuadrático medio entre la señal del modelo identificado
+y la señal de la planta real (s-function + cuenta pulsos). El resultado fue de 57.93, que es un valor aceptable
+tomando como criterio que se trata de un error menor al 2%, con respecto al valor final de la curva, y menor a un 3%,
+con respecto al valor inicial.
