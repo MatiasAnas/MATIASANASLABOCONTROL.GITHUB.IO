@@ -1,0 +1,18 @@
+Identificación:
+Dada la forma de la respuesta al escalón de la planta, inicialmente se procedió a proponer una modelización de planta
+utilizando un sistema de primer orden:
+H(s) = A / (s * tau + 1) * exp(-t0 * s)
+Para realizar la identificación será necesario correr el archivo "ejercicio_2.m", que a su vez ejecuta el 
+simulink "test_motor_2016a.slx". El mismo realizará la estimación de los parámetros de la transferencia propuesta
+y generará un gráfico comparación entre la respuesta al escalón del sistema real vs identificado.
+
+A simple vista se observa que no hay un retardo apreciable entre aplicar el escalón y la respuesta al mismo.
+Dado a que no se observa un retardo de tiempo comparable con el tiempo entre mediciones de velocidad emitidas
+por la funcion implementada, es posible suponer que t0 -> 0. 
+
+Simplemente con correr el script, el mismo ejecutara el archivo anterior 'test_motor.slx'.
+Con los datos del mismo, obtendrá a identificación de la planta generando un gráfico con la comparación
+entre la planta real y el modelo identificado. 
+El script generará una salida de texto similar a la siguiente:
+
+Transferencia Resultado: H(s) = 366.67 / (s * 0.04 + 1) * exp(-0.00 * s)

@@ -4,11 +4,30 @@ En la carpeta se encuentran:
 -pid_sfun: S-Function con el PID.
 -test_motor_control: Archivo con el control del motor, tanto para el modelo identificado como para la planta real.
 
-Criterio:
-Se ha optado como criterio de ajuste de los PID poder llegar al valor de referencia, en el menor tiempo posible, limitando a que el sobrepico no exceda un 3% y teniendo en cuenta que no se sature la tensión de entrada. Se ha tomado como referencia inicial los valores dados por el método de ziegler nichols, sin embargo, se necesito un reajuste manual posterior para lograr que la entrada no sature y el sobrepico no exceda el 3%.
+Criterio propuesto:
+
+Se ha optado como criterio de ajuste de los PID poder llegar al valor de referencia, en el menor tiempo posible,
+ limitando a que el sobrepico no exceda un 3% y teniendo en cuenta que no se sature la tensión de entrada.
+
+Modo de elección de los valores del PID:
+
+Para controlar la planta, se penso en utilizar alguno de los métodos de Ziegler-Nichols.
+El primer método de Ziegler no pudo ser utilizado dado que para utilizarlo es necesario que la planta caracterizada
+poseyera un "time delay", que en nuestro caso no pudo ser estimado. Por ende, se procedió a intentar utilizar
+el segundo método de ZN, que consiste en a lazo cerrado colocar un controlador tipo Proporcional y aumentar su valor
+hasta que el sistema comience a oscilar al aplicar un impulso en la entrada. Para ello se conecto la planta real
+junto al controlador proporcional y se aumentó el valor hasta obtener un valor de 0.036, y se procedió a medir
+el período de oscilación del sistema. Posteriormente se utilizó la tabla provista por ZN para hallar los valores de
+las constantes del PID.
+No obstante, con estos valores el PID obtenido no estabilizaba la planta, y por ende fue necesario empezar a tocar
+dichos valores hasta que finalmente se pudo obtener un resultado en concordancia con lo que se habia propuesto.
+
 
 Diferencias entre la planta identificada y real:
-Se ha observado que la planta real posee una tendencia a oscilar mas que el modelo de primer orden propuesto. Por lo tanto, se requirió bajar la ganancia proporcional, con respecto a la ganancia utilizada con el modelo identificado, para poder lograr las especificaciones propuestas.
+Se ha observado que la planta real posee una tendencia a oscilar mas que el modelo de primer orden propuesto. 
+Por lo tanto, se requirió bajar la ganancia proporcional, 
+con respecto a la ganancia utilizada con el modelo identificado, para poder lograr las especificaciones propuestas.
+
 
 Parametros de los PID:
 -Planta Identificada:

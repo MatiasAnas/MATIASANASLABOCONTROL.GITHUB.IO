@@ -6,7 +6,7 @@ T_INICIO_DE_SEGUNDO_ESCALON = 0.25;
 T_FINAL_SIMULACION = 0.5;
 
 % Simulo.
-simOut = sim('test_motor.slx','ReturnWorkspaceOutputs','on');
+simOut = sim('test_motor_2016a.slx','ReturnWorkspaceOutputs','on');
 
 tiempos = simOut.get('tout');
 velocidad = simOut.get('yout').signals.values;

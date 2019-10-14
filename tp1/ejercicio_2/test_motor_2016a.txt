@@ -1,0 +1,17 @@
+El archivo "text_motor_2016a.slx" se generó para poder testear que la s-function que cuenta pulsos 
+funciona como debería. Para esto se ha excitado la s-function del motor con dos pulsos, dos escalones de 
+6V cada uno separados en el tiempo por 0.25 segundos. Puede observarse la respuesta en el scope "ScopeVelocidad",
+se trata de dos exponenciales sumadas, o al menos eso es lo que aparenta ser a simple vista.
+
+Se ha optado como método de medición, medir la cantidad de pulsos que aparecen en una ventana de 0.005 segundos
+y posteriormente un escalado para llevarlo a rpm. Se ha elegido para el motor utilizar un parámetro "ppv_encoder"
+(pasos por vuelta del encoder) de 150, que es un valor que se encuentra en el mercado para un encoder de alta calidad.
+
+Se ha optado por muestrear los pulsos de entrada cada 0.00001 segundos dado que se necesita poder detectar los flancos
+de la señal del encoder con una alta velocidad. No se ha optado por incrementarlo mas dado a que se buscó que la
+simulación pudiera realizarse en aproximadamente 10 segundos.
+
+Se ha optado como elección del solver el ode45 que a pesar de ser una simulación de un sistema conmutado, dio
+resultados satisfactorios en cuanto a la forma de la señal y sus transiciones abruptas.
+
+
