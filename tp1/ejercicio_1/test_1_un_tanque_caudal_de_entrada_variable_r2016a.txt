@@ -5,9 +5,24 @@ La secuencia del caudal de entrada es la siguiente:
 - Se decrementa de 1 a 0 en t1 = 15.
 - Se incrementa de 0 a 0.5 en t2 = 0.5.
 
-Se deberá observar en el scope 'Nivel - H' como cuando el caudal de entrada está fijo en un valor distinto de 0, el nivel del tanque se incrementa hasta llegar a un equilibrio. Por otro lado cuando el caudal de entrada está en 0, el nivel del tanque se decrementa hasta 0.
+Se deberá observar en el scope 'Nivel - H' como cuando el caudal de entrada está fijo en un valor distinto de 0,
+el nivel del tanque se incrementa hasta llegar a un equilibrio. Por otro lado cuando el caudal de entrada está en 0,
+ el nivel del tanque se decrementa hasta 0.
 
-Se deberá observar en el scope 'Caudal - Q' los caudales de entrada y salida del tanque. Se observa que, pasados los transitorios, ambos caudales siempre se igualan.
+Se deberá observar en el scope 'Caudal - Q' los caudales de entrada y salida del tanque. Se observa que,
+ pasados los transitorios, ambos caudales siempre se igualan.
+
+Elección de parámetros del tanque:
+Se han elegido como parámetros del/los tanque/s numeros del orden de la unidad tanto para alturas como para
+caudales, areas y resistencias a modo tal de poder obtener resultados cualitativos del comportamiento del tanque
+sin hacer foco en las cantidades
+
+Selección del solver:
+Se ha optado por utilizar el solver ODE23TB. Se ha optado por utilizar este dado a que es de paso variable, condicion
+necesaria para poder resolver el problema en un tiempo razonable con una resolución/cantidad de puntos aceptable.
+Además se ha optado por un solver de tipo stiff, que es mas apto para resolver problemas mal condicionados.
 
 Observación:
-Se observó que se tenía un problema con el caudal de salida. El mismo oscilaba levemente alrededor de 0 cuando tenia que llegar a ese valor. Dicho error fue corregido y ahora se mantiene en 0 en los momentos en que la altura es 0.
+Se observó que se tenía un problema con el caudal de salida.
+ El mismo oscilaba levemente alrededor de 0 cuando tenia que llegar a ese valor. 
+Dicho error fue corregido y ahora se mantiene en 0 en los momentos en que la altura es 0.

@@ -2,6 +2,18 @@ En esta simulación demostramos como el modelo de el tanque se comporta ante situ
 
 La señal de entrada se incrementa desde un valor 0 a 1 en t0 = 1, y se decrementa de 1 a 0 en un t1 = 15.
 
-Se observa en el scope 'Nivel - H' que el nivel se incrementa hasta el valor de saturación, que en este caso es 0.6, y luego se decrementa a 0 nuevamente.
+Se observa en el scope 'Nivel - H' que el nivel se incrementa hasta el valor de saturación, 
+que en este caso es 0.6, y luego se decrementa a 0 nuevamente.
 
-Se observa en el scope 'Caudal - Q' que hay una perdida de caudal, y el de salida no llega a igualar al de entrada cuando el mismo esta en 1.
+Se observa en el scope 'Caudal - Q' que hay una perdida de caudal, y el de salida no llega a igualar al de entrada 
+cuando el mismo esta en 1.
+
+Elección de parámetros del tanque:
+Se han elegido como parámetros del/los tanque/s numeros del orden de la unidad tanto para alturas como para
+caudales, areas y resistencias a modo tal de poder obtener resultados cualitativos del comportamiento del tanque
+sin hacer foco en las cantidades
+
+Selección del solver:
+Se ha optado por utilizar el solver ODE23TB. Se ha optado por utilizar este dado a que es de paso variable, condicion
+necesaria para poder resolver el problema en un tiempo razonable con una resolución/cantidad de puntos aceptable.
+Además se ha optado por un solver de tipo stiff, que es mas apto para resolver problemas mal condicionados.

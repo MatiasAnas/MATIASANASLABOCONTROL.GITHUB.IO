@@ -7,3 +7,13 @@ El nivel inicial del tanque está en 1.
 Se observa en el scope 'Nivel - H' como el nivel baja de 1 a 0.
 
 Se observa en el scope 'Caudal - Q' que el caudal de salida decae hasta que el tanque se vacía, y queda en 0.
+
+Elección de parámetros del tanque:
+Se han elegido como parámetros del/los tanque/s numeros del orden de la unidad tanto para alturas como para
+caudales, areas y resistencias a modo tal de poder obtener resultados cualitativos del comportamiento del tanque
+sin hacer foco en las cantidades
+
+Selección del solver:
+Se ha optado por utilizar el solver ODE23TB. Se ha optado por utilizar este dado a que es de paso variable, condicion
+necesaria para poder resolver el problema en un tiempo razonable con una resolución/cantidad de puntos aceptable.
+Además se ha optado por un solver de tipo stiff, que es mas apto para resolver problemas mal condicionados.

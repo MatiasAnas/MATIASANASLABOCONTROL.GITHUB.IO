@@ -2,7 +2,9 @@ En esta simulación se observan los tres tanques conectados.
 
 El caudal de entrada se incrementa de 0 a 1 en t0 = 1, luego se lo decrementa a 0 en t1 = 20.
 
-Se observa en el scope 'Nivel - H' como los tres se llenan y luego se vacían. Se observa que el primer tanque es el primero en llenarse y el ultimo en vaciarse, como se esperaba. Por otro lado se observa que los niveles finales no son los mismos, sino que hay un Delta H de tanque a tanque, cosa que puede demostrarse matemáticamente:
+Se observa en el scope 'Nivel - H' como los tres se llenan y luego se vacían. Se observa que el primer tanque es el
+ primero en llenarse y el ultimo en vaciarse, como se esperaba. Por otro lado se observa que los niveles finales 
+no son los mismos, sino que hay un Delta H de tanque a tanque, cosa que puede demostrarse matemáticamente:
 
 En equilibrio:
 qi = qo
@@ -19,3 +21,13 @@ y:
 H_siguiente < H_anterior
 
 Se observa en el scope 'Caudal - Q' como cuando se alcanza el equilibrio, los caudales se igualan.
+
+Elección de parámetros del tanque:
+Se han elegido como parámetros del/los tanque/s numeros del orden de la unidad tanto para alturas como para
+caudales, areas y resistencias a modo tal de poder obtener resultados cualitativos del comportamiento del tanque
+sin hacer foco en las cantidades
+
+Selección del solver:
+Se ha optado por utilizar el solver ODE23TB. Se ha optado por utilizar este dado a que es de paso variable, condicion
+necesaria para poder resolver el problema en un tiempo razonable con una resolución/cantidad de puntos aceptable.
+Además se ha optado por un solver de tipo stiff, que es mas apto para resolver problemas mal condicionados.
