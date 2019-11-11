@@ -20,7 +20,7 @@ void setup() {
   // initialize the serial communication:
   pinMode(pwmOutput, OUTPUT);
   pinMode(INTERRUPT_PIN, INPUT_PULLUP);
-  Serial.begin(9600);
+  Serial.begin(115200);
   attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), countEdges, CHANGE);
   analogWrite(pwmOutput,0);
 }
@@ -32,16 +32,27 @@ void loop() {
     
     edgesCountBuffer = edgesCount;
     edgesCount = 0;
-  
-    float RPM = (float)edgesCountBuffer * 50.0 / ((float)ENCODER_PPV * 2.0) * 60;
 
-    Serial.write(  highByte( (uint16_t)(RPM) )  );
-    Serial.write(  lowByte ( (uint16_t)(RPM) )  );
-    Serial.write(  lowByte( (uint16_t)(duty) )  );
-    
-    //Para el serial plotter de arduino.
+    //Para enviar a MATLAB.
     //float RPM = (float)edgesCountBuffer * 50.0 / ((float)ENCODER_PPV * 2.0) * 60;
+    //Serial.write(  highByte( (uint16_t)(RPM) )  );
+    //Serial.write(  lowByte ( (uint16_t)(RPM) )  );
+    //Serial.write(  lowByte( (uint16_t)(duty) )  );
+    
+    //Para el ide de Arduino.
+    float RPM = (float)edgesCountBuffer * 50.0 / ((float)ENCODER_PPV * 2.0) * 60;
     //float RPM = (float)edgesCountBuffer;
+
+    //Para identificacion con ide de Arduino.
+    if(2000 > millis()) {
+      Serial.print(millis(), DEC);
+      Serial.print(",");
+      Serial.print(duty, DEC);
+      Serial.print(",");
+      Serial.println(RPM, DEC);
+    }
+    
+    //Para serial plotter del ide de Arduino.
     //Serial.println(RPM, DEC);
   }
   if(pwmCounter < millis()) {
