@@ -5,16 +5,29 @@ load('tout.mat')
 load('velocidades.mat')
 load('pwm.mat')
 
+
+M=csvread('datos_identificacion.txt');
+
+t=M(:,1)/1000;
+p=M(:,2);
+v=M(:,3);
+
+t=t(50:end);
+v=v(50:end);
+p=p(50:end);
+
+
+
 %velocidades es 0 hasta la fila 51, asi que para ajustar achico ambos vectores
 
-v = velocidades(50:end);
+% v = velocidades(50:end);
 
 %tout va en intervalos de 0.2 asi que genero un t acorde
-t = 0:0.2:16.4;
+%t = 0:0.2:16.4;
 
 %pwm
-pwm = double(pwm);
-p = double(pwm(50:end));
+% pwm = double(pwm);
+% p = double(pwm(50:end));
 
 %veo si plotea bien
 figure(1);
@@ -22,43 +35,42 @@ plot(t,v,t,p);
 grid on;
 hold on;
 
-% Vamos al curve fitter
-% %Copiado de la aplicacion de ajuste
-% General model Exp2:
-%      f(x) = a*exp(b*x) + c*exp(d*x)
-% Coefficients (with 95% confidence bounds):
-%        a =        3529  (3467, 3592)
-%        b =  -0.0004964  (-0.002243, 0.00125)
-%        c =       -3739  (-3944, -3533)
-%        d =      -2.116  (-2.338, -1.893)
-% 
-% Goodness of fit:
-%   SSE: 9.901e+05
-%   R-square: 0.9583
-%   Adjusted R-square: 0.9568
-%   RMSE: 112
-% 
-% a = 3529; b = -0.0004964; c = -3739; d = -2.116;
-% 
-% g1 = a*exp(b*t); g2 = c*exp(d*t); g = g1+g2; plot(t,g) close all;
+
 
 %ver el identification toolbox
 s = tf('s');
-G = 42.36/(s+3.08); %1 polo
-G2 = 1058/((s+25.34)*(s+3)); %2 polos
-G3 = (2.78*s+36.88)/(s+2.681); %1 zero, 1 polos
-G4 = -(s*1936-4.567e4)/((s+1100)*(s+3));%1 zero, dos polos
+
+
+
+G = 425.5/(s+30.87); %1 polo %int conf : 81.36
+G2 = 1.211e05/((s+290.5995)*(s+30.2292)); %2 polos % int conf : 86.28
+G3 = (2.531*s + 374.4)/(s+27.14); %1 zero, 1 polos int conf : 86.03
+G4 = (-2.649e04*s + 7.134e06)/((s+17133.03)*(s+30.21));%1 zero, dos polos int conf 86.28
 %nota, G4 es inestable a lazo cerrado, pero muy justito, dividiendo por 2
 %se hace estable pero no nos sirve del todo,
 opt = stepDataOptions('StepAmplitude',255);
 
 figure(2)
-plot(t,v,'g');
+plot(t-1,v,'g');
 hold on;
 step(G,opt,10)
 step(G2,opt,10)
 step(G3,opt,10)
 step(G4,opt,10)
 grid on;
+xticks([0 0.02 0.04 0.06 0.08 0.1 0.12 0.14 0.16 0.18 0.2 0.22 0.24 0.26 0.28 0.3 0.32 0.34 0.36 0.38 0.4 0.42 0.44 0.46 0.48 0.5]);
 legend('Data Original','1Polo','2Polos','1Zero 1Polo','1Zero, 2Polos')
+xlim([0 0.5])
+ylim([0 4000])
 
+%vamos al sisotool
+%requisitos: OS<3% , TS<0.1s
+
+C = 0.16819*(s+37.31)/s;
+
+%Graficamos la planta a lazo cerrado con controlador
+
+figure();
+
+step(feedback(G2*C,1),opt)
+grid on;
