@@ -22,11 +22,16 @@ float Ik = 0;
 //float kp = 0.16819;
 //float ki = 37.31;
 
-float kp = 0.13;
-float ki = 5;
+//float kp = 0.13;
+//float ki = 5;
+//uint8_t nkp = 13;
+//uint8_t nki = 5;
+//uint8_t nkd = 0;
 
-uint8_t nkp = 13;
-uint8_t nki = 5;
+float kp = 0;
+float ki = 0;
+uint8_t nkp = 0;
+uint8_t nki = 0;
 uint8_t nkd = 0;
 uint8_t N = 0;
 
@@ -59,17 +64,23 @@ void loop() {
     pidOutput(RPM);
 
     if (Serial.available() >= 10) {
-      //char a = Serial.read();
-      //char b = Serial.read();
-      //char c = Serial.read();
-      //char d = Serial.read();
-      nkp = Serial.read();
-      nki = Serial.read();
-      nkd = Serial.read();
-      reference_high = Serial.read();
-      reference_low  = Serial.read();
-      reference = reference_high * 256 + reference_low;
-      N = Serial.read();
+      char a = Serial.read();
+      char b = Serial.read();
+      char c = Serial.read();
+      char d = Serial.read();
+      if((a == 'a') && (b == 'b') && (c == 'c') &&(d == 'd')) {
+        nkp = Serial.read();
+        nki = Serial.read();
+        nkd = Serial.read();
+        reference_high = Serial.read();
+        reference_low  = Serial.read();
+        reference = reference_high * 256 + reference_low;
+        N = Serial.read();
+      } else {
+        while(Serial.available() > 0) {
+          char t = Serial.read();
+        }
+      }
     }
 
     kp = 0.01 * (float)nkp;
