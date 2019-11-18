@@ -38,7 +38,7 @@ uint8_t N = 0;
 uint8_t reference_high;
 uint8_t reference_low;
 
-float reference = 2000;
+float reference = 0;
 
 void setup() {
   // initialize the serial communication:
